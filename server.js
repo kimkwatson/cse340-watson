@@ -5,7 +5,7 @@
 /* ***********************
  * Require Statements
  *************************/
-const path = require("path")
+
 const express = require("express")
 const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
@@ -17,7 +17,6 @@ const static = require("./routes/static")
  *************************/
 
 app.set("view engine", "ejs")
-app.set("views", path.join(__dirname, "views"))
 app.use(expressLayouts)
 app.set("layout", "layouts/layout")
 
