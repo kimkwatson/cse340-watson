@@ -29,11 +29,10 @@ header {
 header a {
   text-decoration: none;
   cursor: pointer;
-  color: var(--darkblue);
 }
 
-.sitename {
-  color: var(--black);
+.sitename a {
+  color: var(--darkblue);
   font-family: "Manrope", sans-serif;
   font-size: 2.5rem;
   font-weight: 600;
@@ -41,10 +40,15 @@ header a {
 }
 
 #tools {
+  color: var(--black);
   font-family: "Roboto Flex", sans-serif;
   text-transform: uppercase;
   text-align: right;
   padding-bottom: 1rem;
+}
+
+#tools a {
+  color: var(--black);
 }
 
 nav {
