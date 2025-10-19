@@ -37,4 +37,12 @@ invCont.buildByVehicleId = async function (req, res, next) {
   })
 }
 
+/* ***************************
+ *  Build error page
+ * ************************** */
+
+invCont.buildErrorPage = async function (req, res, next) {
+  const error = new Error
+}
+
 module.exports = invCont

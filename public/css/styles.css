@@ -233,6 +233,7 @@ footer {
 
 #inv-display--price {
   font-size: 1.5rem;
+  color: var(--darkblue);
 }
 
 /* Vehicle Detail Styles */

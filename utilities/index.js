@@ -80,7 +80,7 @@ Util.buildVehicleView = async function(data) {
     view += '<li class="view-list"><h2 id="view-mileage__title">Color: '
     view += '<span id=view-color__color>' + v.inv_color + '</span></h2></li>'
     view += '<li class="view-list"><h2 id="view-mileage__title">Mileage: '
-    view += '<span id="view-mileage__miles">' + v.inv_miles + '</span></h2></li>'
+    view += '<span id="view-mileage__miles">' + new Intl.NumberFormat('en-US').format(v.inv_miles) + '</span></h2></li>'
     view += '</ul>'
   }else { 
     view += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
@@ -95,5 +95,5 @@ Util.buildVehicleView = async function(data) {
  * General Error Handling
  **************************************** */
 Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
-
+  
 module.exports = Util
