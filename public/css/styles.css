@@ -21,7 +21,7 @@
 header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   padding: 1rem;
   background-color: var(--aliceblue);
 }
@@ -60,7 +60,8 @@ nav li a {
   text-decoration: none;
   font-family: "Roboto Flex", sans-serif;
   color: white;
-  padding: 1rem;
+  padding: .5rem;
+  display: block;
 }
 
 nav li a:hover {
@@ -131,7 +132,6 @@ h2 {
   font-weight: 800;
   margin-top: 2rem;
   padding: 2rem;
-  border-bottom: 2px solid var(--red);
 }
 
 #reviews-section li {
@@ -163,7 +163,7 @@ figure {
 }
 
 .upgrade-card img {
-  width: 40%;
+ width: 40%;
   height: auto;
   padding: .5rem;
 }
@@ -175,14 +175,85 @@ figure {
 
 h1 {
   font-family: "Lora", serif;
+  font-size: 2.5rem;
   padding: 2rem;
-  border-top: 1px solid var(--black);
-  border-bottom: 1px solid var(--black);
-  background-color: var(--aliceblue);
+  margin: 0;
 }
+
 
 footer {
   font-family: "Manrope", sans-serif;
+}
+
+/* Classification Styles */
+
+#inv-display {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  list-style: none;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+#inv-display li {
+  border: 1.5px solid lightgray;
+  border-radius: 15px;
+  justify-content: center;
+  width: 350px;
+  text-align: start;
+}
+
+#inv-display img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.namePrice {
+  text-align: center;
+  align-self: center;
+  padding-bottom: 1rem;
+}
+
+#inv-display li > a:first-child {
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+#inv-display li hr {
+  border: none;
+  border-top: 3px solid var(--black);
+  width: 100%;
+}
+
+#inv-display--price {
+  font-size: 1.5rem;
+}
+
+/* Vehicle Detail Styles */
+
+#view-image img {
+  width: 90%;
+  height: auto;
+}
+
+#view-details {
+  margin: 0 auto;
+  padding-left: 0;
+  list-style: none;
+}
+
+#view-details h2 span:not(#view-price__amount) {
+  font-family: "Manrope", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin: 0;
+  padding: 2rem;
 }
 
 @media (min-width: 640px) {
@@ -232,6 +303,17 @@ footer {
     font-size: 1.25rem;
     padding: 1rem;
   }
+
+  /* Vehicle Detail Styles */
+
+  #view-description__blurb {
+  font-family: "Manrope", sans-serif;
+  font-size: 1.5rem;
+  margin: 0;
+  padding: 2rem;
+
+}
+
 }
 
 @media (min-width: 1024px) {
@@ -264,7 +346,7 @@ footer {
 main {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: auto auto;
   gap: 1rem;
 }
 
@@ -281,6 +363,39 @@ main {
 #upgrades-section {
   grid-column: 1/2;
   grid-row: 2/3;
+}
+
+/* Vehicle Detail Styles */
+
+#view-image {
+  grid-area: 2 / 1 / 3 / 2;
+  margin-left: 2.5rem;
+}
+
+#view-image img {
+  width: 100%;
+  height: auto;
+}
+
+#view-details {
+  grid-area: 2 / 2 / 3 / 3;
+  display: block;
+  list-style: none;
+}
+
+.view-list {
+  padding-left: 2rem;
+}
+
+.view-list:nth-of-type(odd) {
+  background-color: var(--aliceblue);
+}
+
+#view-description__blurb {
+  font-family: "Manrope", sans-serif;
+  font-size: 1.5rem;
+  margin: 0;
+  padding: 2rem;
 }
 
 }
