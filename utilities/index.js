@@ -88,6 +88,22 @@ Util.buildVehicleView = async function(data) {
   return view
 }
 
+/* **************************************
+* Build the account login view HTML
+* ************************************ */
+
+Util.buildLogin = async function() {
+  let login
+  login = '<form id="login-form">'
+  + '<label id="login-email">Email: </label>' + '<input type="text" id="login-email--input" name="account_email" placeholder="Enter your email">'
+  + '<label id="login-password">Password: </label>' + '<input type="text" id="login-password--input" name="account_password" placeholder="Enter your password">'
+  + '<button id="login-button">Login</button>'
+  + '<p id="no-account">No account? ' + '<span id="login-registration--link"><a href="">Sign-up</a></span></p>'
+  + '</form>'
+
+  return login
+}
+
 
 /* ****************************************
  * Middleware For Handling Errors
