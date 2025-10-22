@@ -95,15 +95,33 @@ Util.buildVehicleView = async function(data) {
 Util.buildLogin = async function() {
   let login
   login = '<form id="login-form">'
-  + '<label id="login-email">Email: </label>' + '<input type="text" id="login-email--input" name="account_email" placeholder="Enter your email">'
-  + '<label id="login-password">Password: </label>' + '<input type="text" id="login-password--input" name="account_password" placeholder="Enter your password">'
+  + '<label id="login-email">Email:</label>' + '<input type="text" id="login-email--input" name="account_email" placeholder="Enter your email">'
+  + '<label id="login-password">Password:</label>' + '<input type="text" id="login-password--input" name="account_password" placeholder="Enter your password">'
   + '<button id="login-button">Login</button>'
-  + '<p id="no-account">No account? ' + '<span id="login-registration--link"><a href="">Sign-up</a></span></p>'
+  + '<p id="no-account">No account? ' + '<span id="login-registration--link"><a href="/account/register">Sign up</a></span></p>'
   + '</form>'
 
   return login
 }
 
+/* **************************************
+* Build the account registration view HTML
+* ************************************ */
+
+Util.buildRegister = async function() {
+  let register
+  register = '<form id="register-form">'
+  + '<label id=register-fname>First name</label>' + '<input type="text" id="register-fname--input" name="account_firstname" placeholder="Enter your first name">'
+  + '<label id=register-lname>Last name</label>' + '<input type="text" id="register-lname--input" name="account_lastname" placeholder="Enter your last name">'
+  + '<label id=register-email>Email address</label>' + '<input type="text" id="register-email--input" name="account_email" placeholder="Enter your email address">'
+  + '<label id=register-password>Password*</label>' + '<input type="password" id="register-password--input" name="account_password" placeholder="Choose a password">'
+  + '<button id="eye-toggle" type="button"><img src="/images/icons/password-hide.png" alt="Show password" width="24" height="24"></button>'
+  + '<p id="register-email--specs">* must contain a minimum of 12 characters, a capital letter, a number, and a special character</p>'
+  + '<button id="register-button">Register</button>'
+  + '</form>'
+
+  return register
+}
 
 /* ****************************************
  * Middleware For Handling Errors

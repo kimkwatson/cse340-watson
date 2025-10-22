@@ -1,0 +1,17 @@
+<%# Content Heading %>
+
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<%# Flash Message %>
+
+<%- messages() %>
+
+<%# Register Form %>
+
+<%- register %>
+
+<script src="/js/script.js" defer></script>

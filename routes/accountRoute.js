@@ -12,4 +12,8 @@ const utilities = require("../utilities/index")
 
 router.get("/login", accountController.buildLogin)
 
+// Route to registration page
+
+router.get("/register", accountController.buildRegister)
+
 module.exports = router;
