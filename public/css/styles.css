@@ -290,7 +290,7 @@ footer {
 }
 
 #no-account {
-  font-family: "Roboto Flex", sans-serif;
+  font-family: "Aleo", serif;
 }
 
 #login-registration--link > a {
@@ -299,7 +299,7 @@ footer {
 
 #login-button {
   margin-top: 1.25rem;
-  padding: .5rem 2.5rem;
+  padding: 1rem 3.5rem;
   border: 1px solid var(--orange);
   border-radius: 30px;
   background-color: var(--offwhite);
@@ -307,6 +307,8 @@ footer {
   text-transform: uppercase;
   font-family: "Manrope", sans-serif;
   font-size: 1rem;
+  line-height: .6;
+  letter-spacing: .2em;
 }
 
 @media (min-width: 640px) {
