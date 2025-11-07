@@ -1,0 +1,30 @@
+<%# Content Heading %>
+
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<%# Flash Message %>
+
+<%- messages() %>
+
+<%# Errors %>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+<%# Classification Form %>
+
+<form class="form" method="post" action="/inv/add-classification">
+    <label class="label" for="classification_name">New Classification Name:</label>
+      <p id="classification--specs">(may not contain spaces or special characters)</p>
+    <input class="input" type="text" id="login-email--input" name="classification_name" required placeholder="Enter new classification">
+    <button id="add-button" type="submit">Add Now</button>
+</form>
