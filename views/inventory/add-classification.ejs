@@ -25,6 +25,6 @@
 <form class="form" method="post" action="/inv/add-classification">
     <label class="label" for="classification_name">New Classification Name:</label>
       <p id="classification--specs">(may not contain spaces or special characters)</p>
-    <input class="input" type="text" name="classification_name" required placeholder="Enter new classification" pattern="/^[A-Za-z0-9]+$/">
+    <input class="input" type="text" name="classification_name" required placeholder="Enter new classification" pattern="[A-Za-z0-9]+">
     <button id="add-button" type="submit">Add Classification</button>
 </form>
