@@ -12,14 +12,9 @@ invCont.buildByClassificationId = async function (req, res, next) {
   let nav = await utilities.getNav()
 
   if (!data || data.length === 0) {
-      req.flash('notice', 'No vehicles found for that classification.')
-      /*return res.status(404).render('inventory/classification', {
-        title: 'No vehicles',
-        nav,
-        grid: '<h2>No vehicles found.</h2>',
-        errors: null,
-      })*/
-     return res.redirect('/inv/management')
+      req.flash('notice', 'No vehicles found for that classification. Would you like to add new inventory?')
+      
+      return res.redirect('/inv/management')
     }
 
   const grid = await utilities.buildClassificationGrid(data)
@@ -89,6 +84,64 @@ invCont.addClassification = async function (req, res, next) {
 
   if (newClassification) {
     req.flash("notice", `New classification ${classification_name} has been added.`)
+    return res.redirect('/inv/management')
+  } else {
+    return res.status(500).render("inventory/add-classification", {
+      title: "Add Classification",
+      nav,
+      errors: [{ message: "Insert failed" }],
+    })
+  }
+}
+
+/* ***************************
+ *  Build add inventory form view
+ * ************************** */
+
+invCont.buildAddInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  let classification = await utilities.buildClassificationList()
+  res.render("inventory/add-inventory", {
+    title: "Add Inventory",
+    nav,
+    classification,
+    errors: null,
+  })
+}
+
+/* ****************************************
+*  Process New Inventory
+* *************************************** */
+invCont.addInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const {
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id,
+   } = req.body
+
+  const newInv = await invModel.insertInventory({
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id,
+  })
+
+  if (newInv) {
+    req.flash("notice", `${inv_year} ${inv_make} ${inv_model} has been added to the inventory.`)
     return res.redirect('/inv/management')
   } else {
     return res.status(500).render("inventory/add-classification", {
