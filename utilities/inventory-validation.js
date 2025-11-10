@@ -53,7 +53,7 @@ const validate = {}
       body("inv_description")
         .trim()
         .notEmpty()
-        .isLength({ min: 10 }).withMessage("Please provide a description with at least 10 characters.")
+        .isLength({ min: 10 }).withMessage("Description must include at least 10 characters.")
         .withMessage("Please provide a vehicle description."), // on error this message is sent.
 
       // price is required and can be an integer or a float
@@ -75,8 +75,8 @@ const validate = {}
       // color is required and must be at least 3 characters
       body("inv_color")
         .trim()
-        .notEmpty().withMessage("Please provide a color.")
-        .isLength({ min: 3 }).withMessage("Please provide a color with at least 3 characters.")
+        .notEmpty()
+        .isLength({ min: 3 }).withMessage("Color must include at least 3 characters.")
         .withMessage("Please provide a vehicle color.") // on error this message is sent
     ]
   }
