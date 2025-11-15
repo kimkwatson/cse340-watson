@@ -24,3 +24,15 @@
 
 <a id="management-link--addClass" class="management-link" href="/inv/add-classification">Add new classification</a>
 <a id="management-link--addInv" class="management-link" href="/inv/add-inventory">Add new inventory</a>
+
+<div id="manage-inv-wrapper">
+  <h2 id="manage-inv">Manage Inventory</h2>
+  <p id="manage-inv--instruction">Select a classification to view the inventory.</p>
+
+  <%- classificationSelect %>
+
+  <table id="inventoryDisplay"></table>
+  <noscript>JavaScript must be enabled to use this page.</noscript>
+
+  <script src="../../js/inventory.js"></script>
+</div>

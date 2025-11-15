@@ -190,7 +190,7 @@ footer {
 #inv-display {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-evenly;
   list-style: none;
   gap: 1.5rem;
   padding: 1.5rem;
@@ -344,7 +344,7 @@ footer {
   display: block;
   padding: 1rem;
   font-family: "Roboto Flex", sans-serif;
-  font-size: 1.5rem;
+  font-size: 1rem;
   border: 1px solid var(--black);
   border-radius: 5px;
 }
@@ -379,6 +379,66 @@ footer {
   margin: 1.5rem;
   text-align: center;
   text-decoration: none;
+}
+
+.management-link:hover {
+  background-color: var(--darkblue);
+  color: white;
+}
+
+#manage-inv--instruction {
+  font-family: "Roboto Flex", sans-serif;
+  font-size: 1.25rem;
+  padding: 0 2rem;
+}
+
+#manage-inv-wrapper {
+  grid-area: 4 / 1 / 5 / 2;
+}
+
+#manage-inv {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+#classificationList {
+  margin: 1.5rem;
+  font-family: "Manrope", sans-serif;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+}
+
+#inventoryDisplay {
+  margin: 1.5rem;
+  padding: .5rem;
+  border: 2px solid var(--black);
+  font-family: "Manrope", sans-serif;
+  font-size: 1rem;
+  border-collapse: collapse;
+}
+
+#inventoryDisplay th, td {
+  border-bottom: 2px solid var(--black);
+  padding: 1rem;
+}
+
+#inventoryDisplay td > a {
+  color: var(--white);
+}
+
+#inventoryDisplay tbody tr:nth-child(odd) {
+  background: var(--aliceblue);
+}
+
+#inventoryDisplay tbody tr:hover {
+  background: var(--darkblue);
+  color: white;
+}
+
+#inventoryDisplay tbody td > a:hover {
+  color: var(--yellow);
 }
 
 @media (min-width: 640px) {
