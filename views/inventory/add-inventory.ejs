@@ -32,7 +32,7 @@
     <label class="label" for="inv_year">Year:</label>
         <input class="input" type="number" min="1900" max="2099" name="inv_year" required placeholder="Enter 4-digit year" value="<%= locals.inv_year %>">
     <label class="label" for="inv_description">Description:</label>
-        <input class="input" type="text" name="inv_description" minlength="10" required placeholder="Enter description" value="<%= locals.inv_description %>">
+        <textarea class="input" name="inv_description" minlength="10" required placeholder="Enter description" value="<%= locals.inv_description %>"></textarea>
     <label class="label" for="inv_image">Image:</label>
         <input class="input" type="text" name="inv_image" placeholder="Upload image" value="/images/vehicles/no-image.png">
     <label class="label" for="inv_thumbnail">Thumbnail:</label>

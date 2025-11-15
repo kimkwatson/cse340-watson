@@ -11,7 +11,7 @@ router.get("/type/:classificationId", invController.buildByClassificationId)
 router.get("/detail/:invId", invController.buildByVehicleId)
 
 // Route to management view
-router.get("/", invController.buildInvManagement)
+router.get("/management", invController.buildInvManagement)
 
 // Route to add classification view
 router.get("/add-classification", invController.buildAddClassification)
@@ -39,6 +39,5 @@ router.post(
 router.get("/getInventory/:classification_id", invController.getInventoryJSON)
 
 // Route to edit inventory
-router.get()
 
 module.exports = router;
