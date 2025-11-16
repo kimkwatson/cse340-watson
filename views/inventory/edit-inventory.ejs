@@ -1,0 +1,47 @@
+<%# Content Heading %>
+
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<%# Flash Message %>
+
+<%- messages() %>
+
+<%# Errors %>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+<%# Inventory Form %>
+
+<form class="form" method="post" action="/inv/update">
+    <label class="label" for="classification_id">Classification:</label>
+        <%- classificationSelect %>
+    <label class="label" for="inv_make">Make:</label>
+        <input class="input" type="text" name="inv_make" minlength="3" required placeholder="Modify vehicle make (min 3 letters)" value="<%= locals.inv_make %>">
+    <label class="label" for="inv_model">Model:</label>
+        <input class="input" type="text" name="inv_model" minlength="3" required placeholder="Modify vehicle model (min 3 letters)" value="<%= locals.inv_model %>">
+    <label class="label" for="inv_year">Year:</label>
+        <input class="input" type="number" min="1900" max="2099" name="inv_year" required placeholder="Edit 4-digit year" value="<%= locals.inv_year %>">
+    <label class="label" for="inv_description">Description:</label>
+        <textarea class="input" name="inv_description" minlength="10" required placeholder="Edit description"><%= locals.inv_description %></textarea>
+    <label class="label" for="inv_image">Image:</label>
+        <input class="input" type="text" name="inv_image" placeholder="Upload image" value="/images/vehicles/no-image.png">
+    <label class="label" for="inv_thumbnail">Thumbnail:</label>
+        <input class="input" type="text" name="inv_thumbnail" placeholder="Upload thumbnail" value="/images/vehicles/no-image.png">
+    <label class="label" for="inv_price">Price:</label>
+        <input class="input" type="number" name="inv_price" min="1000" required placeholder="Edit price (integer or decimal)" value="<%= locals.inv_price %>">
+    <label class="label" for="inv_miles">Miles:</label>
+        <input class="input" type="number" name="inv_miles" required placeholder="Edit miles (integer)" value="<%= locals.inv_miles %>">
+    <label class="label" for="inv_color">Color:</label>
+        <input class="input" type="text" name="inv_color" minlength="3" required placeholder="Edit color (min 3 letters)" value="<%= locals.inv_color %>">
+    <button id="add-button" type="submit">Update Vehicle</button>
+</form>
