@@ -41,4 +41,11 @@ router.get("/getInventory/:classification_id", invController.getInventoryJSON)
 // Route to edit inventory
 router.get("/edit/:inv_id", invController.buildEditInventoryView)
 
+// Route to inventory update view
+router.post(
+    "/edit-inventory",
+    invValidate.inventoryRules(),
+    invValidate.checkUpdateData,
+    invController.updateInventory)
+
 module.exports = router;

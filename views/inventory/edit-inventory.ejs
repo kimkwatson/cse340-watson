@@ -22,7 +22,7 @@
 
 <%# Inventory Form %>
 
-<form class="form" method="post" action="/inv/update">
+<form class="form" method="post" action="/inv/edit-inventory">
     <label class="label" for="classification_id">Classification:</label>
         <%- classificationSelect %>
     <label class="label" for="inv_make">Make:</label>
@@ -34,9 +34,9 @@
     <label class="label" for="inv_description">Description:</label>
         <textarea class="input" name="inv_description" minlength="10" required placeholder="Edit description"><%= locals.inv_description %></textarea>
     <label class="label" for="inv_image">Image:</label>
-        <input class="input" type="text" name="inv_image" placeholder="Upload image" value="/images/vehicles/no-image.png">
+        <input class="input" type="text" name="inv_image" placeholder="Upload image" value="<%= locals.inv_image %>">
     <label class="label" for="inv_thumbnail">Thumbnail:</label>
-        <input class="input" type="text" name="inv_thumbnail" placeholder="Upload thumbnail" value="/images/vehicles/no-image.png">
+        <input class="input" type="text" name="inv_thumbnail" placeholder="Upload thumbnail" value="<%= locals.inv_thumbnail %>">
     <label class="label" for="inv_price">Price:</label>
         <input class="input" type="number" name="inv_price" min="1000" required placeholder="Edit price (integer or decimal)" value="<%= locals.inv_price %>">
     <label class="label" for="inv_miles">Miles:</label>
@@ -44,4 +44,6 @@
     <label class="label" for="inv_color">Color:</label>
         <input class="input" type="text" name="inv_color" minlength="3" required placeholder="Edit color (min 3 letters)" value="<%= locals.inv_color %>">
     <button id="add-button" type="submit">Update Vehicle</button>
+    <input type="hidden" name="inv_id"
+    <% if(locals.inv_id) { %> value="<%= locals.inv_id %>" <% } %>>
 </form>
