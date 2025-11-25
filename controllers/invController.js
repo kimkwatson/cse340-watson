@@ -59,11 +59,21 @@ invCont.buildInvManagement = async function (req, res, next) {
   let nav = await utilities.getNav()
   let tools = await utilities.getTools()
   const classificationSelect = await utilities.buildClassificationList()
-  res.render("inventory/management", {
-    title: "Inventory Management",
+  const type = res.locals.accountData.account_type
+  if (type === "Employee" || type === "Admin")
+    res.render("inventory/management", {
+      title: "Inventory Management",
+      tools,
+      nav,
+      classificationSelect,
+      errors: null,
+    })
+  else if (type === "Client")
+    req.flash('notice', 'Admins and Employees may manage inventory. Please sign in with an authorized account.')
+    res.render("account/login", {
+    title: "Login",
     tools,
     nav,
-    classificationSelect,
     errors: null,
   })
 }

@@ -91,11 +91,22 @@ async function registerAccount(req, res) {
 async function buildaccountManagement(req, res, next) {
   let nav = await utilities.getNav()
   let tools = await utilities.getTools()
+
+  const accountData = res.locals.accountData
+
+  if (!accountData) {
+    return res.redirect("/account/login")
+  }
+
+  const { account_firstname, account_type } = accountData
+
   res.render("account/management", {
     title: "You're logged in",
     tools,
     nav,
     errors: null,
+    account_firstname,
+    account_type,
   })
 }
 

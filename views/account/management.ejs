@@ -19,3 +19,22 @@
 <%  }) %>
  </ul>
 <% } %>
+
+<% if (accountData.account_type === "Admin" || accountData.account_type === "Employee") { %>
+
+  <div id="welcome-admin">
+    <h2>Welcome <%= accountData.account_firstname %></h2>
+    <h3 id="inv-management">Inventory Management</h3>
+    <button id="manage-button"><a href="/inv/management">Manage Inventory</a></button>
+  </div>
+  
+
+<% } else { %>
+  
+  <div id="welcome-client">
+    <h2>Welcome <%= accountData.account_firstname %></h2>
+    <button id="manage-button"><a href="">Update Account Information</a></button>
+  </div>
+  
+
+<% } %>
