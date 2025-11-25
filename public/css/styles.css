@@ -453,6 +453,18 @@ footer {
   color: var(--yellow);
 }
 
+#delete-flag {
+  color: var(--red);
+  font-family: "Roboto Flex", sans-serif;
+  text-transform: uppercase;
+}
+
+#delete-message {
+  font-size: 1.5rem;
+  margin-bottom: 0;
+  padding-left: .5rem;
+}
+
 @media (min-width: 640px) {
   
   body {

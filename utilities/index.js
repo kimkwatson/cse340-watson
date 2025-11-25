@@ -4,6 +4,14 @@ require("dotenv").config()
 const Util = {}
 
 /* ************************
+ * Constructs the account tools menu
+ ************************** */
+Util.getTools = async function (req, res, next) {
+  let tools = "Welcome"
+  return tools
+}
+
+/* ************************
  * Constructs the nav HTML unordered list
  ************************** */
 Util.getNav = async function (req, res, next) {
