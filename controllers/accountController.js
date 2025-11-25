@@ -101,7 +101,7 @@ async function buildaccountManagement(req, res, next) {
   const { account_firstname, account_type } = accountData
 
   res.render("account/management", {
-    title: "You're logged in",
+    title: "Account Management",
     tools,
     nav,
     errors: null,

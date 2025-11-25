@@ -24,8 +24,10 @@
 
   <div id="welcome-admin">
     <h2>Welcome <%= accountData.account_firstname %></h2>
-    <h3 id="inv-management">Inventory Management</h3>
-    <button id="manage-button"><a href="/inv/management">Manage Inventory</a></button>
+    <h3>You're logged in.</h3>
+    <p id="manage-account--link"><a href="">Edit Account Information</a></p>
+    <h2 id="inv-management">Inventory Management</h2>
+    <p id="manage-inv--link"><a href="/inv/management">Manage Inventory</a></p>
   </div>
   
 
@@ -33,7 +35,8 @@
   
   <div id="welcome-client">
     <h2>Welcome <%= accountData.account_firstname %></h2>
-    <button id="manage-button"><a href="">Update Account Information</a></button>
+    <h3>You're logged in.</h3>
+    <p id="manage-account--link"><a href="">Edit Account Information</a></p>
   </div>
   
 
