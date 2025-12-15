@@ -10,6 +10,14 @@
 
 <%- messages() %>
 
+<%# Account Information %>
+
+<ul id="messages">
+  <li>First Name: <%= accountData.account_firstname %></li>
+  <li>Last Name: <%= accountData.account_lastname %></li>
+  <li>Email: <%= accountData.account_email %></li>
+</ul>
+
 <%# Errors %>
 
 <% if (errors) { %>
@@ -20,23 +28,28 @@
  </ul>
 <% } %>
 
+<%# Welcome Messages %>
+
 <% if (accountData.account_type === "Admin" || accountData.account_type === "Employee") { %>
 
+  <%# Admin or Employee %>
+  
   <div id="welcome-admin">
     <h2>Welcome <%= accountData.account_firstname %></h2>
     <h3>You're logged in.</h3>
-    <p id="manage-account--link"><a href="">Edit Account Information</a></p>
-    <h2 id="inv-management">Inventory Management</h2>
+    <p id="manage-account--link"><a href="/account/update">Edit Account Information</a></p>
+    <h2 class="inv-management--title">Inventory Management</h2>
     <p id="manage-inv--link"><a href="/inv/management">Manage Inventory</a></p>
   </div>
-  
 
 <% } else { %>
+
+  <%# Client %>
   
   <div id="welcome-client">
     <h2>Welcome <%= accountData.account_firstname %></h2>
     <h3>You're logged in.</h3>
-    <p id="manage-account--link"><a href="">Edit Account Information</a></p>
+    <p id="manage-account--link"><a href="/account/update">Edit Account Information</a></p>
   </div>
   
 

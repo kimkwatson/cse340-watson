@@ -26,11 +26,13 @@
   <label>Email:</label>
     <input type="email" id="login-email--input" name="account_email" required placeholder="Enter your email" required value="<%= locals.account_email %>">
   <label>Password:</label>
-    <p id="register-email--specs">(must contain a minimum of 12 characters, a capital letter, a number, and a special character)</p>
+    <p class="specs">(must contain a minimum of 12 characters, a capital letter, a number, and a special character)</p>
     <input type="password" id="login-password--input" name="account_password" required placeholder="Enter your password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
-  <button id="login__eye-toggle" type="button"><img src="/images/icons/password-hide.png" alt="Show password" width="24" height="24"></button>
+  <button id="login__eye-toggle" type="button" title="Show password"><img src="/images/icons/password-hide.png" alt="Show password" width="24" height="24"></button>
   <button id="login-button">Login</button>
   <p id="no-account">No account? <span id="login-registration--link"><a href="/account/register">Sign up</a></span></p>
 </form>
+
+<%# Show/Hide Password link %>
 
 <script src="/js/script.js" defer></script>

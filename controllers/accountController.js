@@ -111,6 +111,28 @@ async function buildaccountManagement(req, res, next) {
 }
 
 /* ****************************************
+*  Deliver edit account view
+* *************************************** */
+async function buildEditAccount(req, res, next) {
+ 
+  let nav = await utilities.getNav()
+  let tools = await utilities.getTools()
+
+  const account = res.locals.accountData || {}
+
+    res.render("account/update", {
+    title: "Edit Account",
+    tools,
+    nav,
+    account_firstname: account.account_firstname,
+    account_lastname: account.account_lastname,
+    account_email: account.account_email,
+    account_id: account.account_id,
+    errors: null,
+  })
+}
+
+/* ****************************************
  *  Process login request
  * ************************************ */
 async function accountLogin(req, res) {
@@ -155,4 +177,112 @@ async function accountLogin(req, res) {
   }
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildaccountManagement }
+/* ****************************************
+ *  Process update account request
+ * ************************************ */
+async function accountUpdateEmail(req, res) {
+  let nav = await utilities.getNav()
+  let tools = await utilities.getTools()
+  const { account_firstname, account_lastname, account_email, account_id } = req.body
+
+  console.log("🔎 accountUpdateAccount body:", {
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id,
+  })
+
+  //const account_id = res.locals.accountData.account_id
+  const updateResult = await accountModel.updateAccount(
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id,
+  )
+
+  if (updateResult) {
+    
+    const updatedAccount = await accountModel.getAccountById(account_id)
+    try {
+
+      console.log("🔎 updateResult from model:", updateResult)
+      if (updatedAccount) {
+        delete updatedAccount.account_password
+        const accessToken = jwt.sign(updatedAccount, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
+        if(process.env.NODE_ENV === 'development') {
+          res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
+        } else {
+          res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
+        }
+
+        req.flash("notice",`Thank you, ${account_firstname}. Your account has been succesfully updated.`)
+        return res.status(201).render("account/management", {
+          title: "Account Management",
+          nav,
+          tools,
+          errors: null,
+          accountData: updatedAccount,
+        })
+      }
+    else {
+      req.flash("notice", "Sorry, the update failed. Please try again.")
+      res.status(501).render("account/update", {
+        title: "Edit Account",
+        tools,
+        nav,
+        errors: null,
+        account_firstname,
+        account_lastname,
+        account_email,
+        account_id,
+      })
+    }
+  } catch (error) {
+    throw new Error('Update failed.')
+    }
+  }
+}
+
+/* ****************************************
+ *  Process password update
+ * ************************************* */
+
+async function accountUpdatePassword(req, res, next) {
+  let nav = await utilities.getNav()
+  let tools = await utilities.getTools()
+
+  const { account_id, account_password } = req.body
+  
+  try {
+
+    const hashedPassword = await bcrypt.hash(account_password, 10)
+    const updateResult = await accountModel.updatePassword(account_id, hashedPassword)
+
+    if(updateResult) {
+      const accountData = await accountModel.getAccountById(account_id)
+
+      req.flash("notice", "Password updated successfully.")
+
+      return res.status(201).render("account/management", {
+        title: "Account Management",
+        nav,
+        tools,
+        errors: null,
+        accountData,
+      })
+    } else {
+      req.flash("notice", "Sorry, the password update failed. Please try again.")
+      return res.status(501).render("account/update", {
+        title: "Edit Account",
+        nav,
+        tools,
+        errors: null,
+        accountData, 
+      })
+    }
+  } catch (error) {
+    next(error)
+  }
+}
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildaccountManagement, buildEditAccount, accountUpdateEmail, accountUpdatePassword }

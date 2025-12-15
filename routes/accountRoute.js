@@ -38,4 +38,26 @@ router.post(
 
 router.get("/", utilities.checkLogin, accountController.buildaccountManagement)
 
+// Route to edit account view
+
+router.get("/update", accountController.buildEditAccount)
+
+// Process the edit account info attempt
+
+router.post(
+    "/update-account",
+    regValidate.updateAccountRules(),
+    regValidate.checkUpdateData,
+    accountController.accountUpdateEmail
+)
+
+// Process the edit password attempt
+
+router.post(
+    "/update-password",
+    regValidate.updatePasswordRules(),
+    regValidate.checkUpdateData,
+    accountController.accountUpdateEmail
+)
+
 module.exports = router;

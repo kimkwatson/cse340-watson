@@ -40,15 +40,21 @@ header a {
 }
 
 #tools {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
   color: var(--black);
   font-family: "Roboto Flex", sans-serif;
   text-transform: uppercase;
   text-align: right;
-  padding-bottom: 1rem;
 }
 
 #tools a {
   color: var(--black);
+}
+
+#tools a:hover {
+  color: var(--darkblue);
 }
 
 nav {
@@ -286,13 +292,14 @@ footer {
   border-radius: 5px;
   background-color: var(--aliceblue);
   padding: 1.5rem;
+  margin-left: 1rem;
 }
 
 .form > label {
   display: block;
   padding: .5rem;
   font-family: "Aleo", serif;
-  font-size: 1rem;
+  font-size: 1.25rem;
 }
 
 .input {
@@ -307,35 +314,39 @@ footer {
   cursor: pointer;
 }
 
-#login-email--input, #login-password--input, #register-email--input, #register-password--input, .input, #classificationList {
+#login-email--input, #login-password--input, #register-email--input, #register-password--input, .input, #classificationList, #update-password--input {
   width: 100%;
   display: block;
   padding: 1rem;
   font-family: "Roboto Flex", sans-serif;
-  font-size: 1rem;
+  font-size: 1.25rem;
   border: 1px solid var(--black);
   border-radius: 5px;
 }
 
-#login-form > input, #register-form > input {
-  margin-bottom: 1rem;;
+#login__eye-toggle, #register__eye-toggle, #update__eye-toggle {
+  margin: 1rem 0;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
-#no-account, #login-button, #register-button {
-  justify-self: center;
+#no-account, #login-button, #register-button, #edit-button, #update-button {
+  justify-self: left;
   display: block;
   font-size: 1.5rem;
 }
 
 #no-account {
   font-family: "Aleo", serif;
+  font-size: 1.25rem;
 }
 
 #login-registration--link > a {
   color: var(--red);
 }
 
-#login-button, #register-button, #add-button {
+#login-button, #register-button, #add-button, #edit-button, #update-button {
   margin-top: 1.25rem;
   padding: 1rem 3.5rem;
   border: 1px solid var(--orange);
@@ -349,7 +360,7 @@ footer {
   letter-spacing: .2em;
 }
 
-#login-button:hover, #register-button:hover, #add-button:hover {
+#login-button:hover, #register-button:hover, #add-button:hover, #edit-button:hover, #update-button:hover {
   background-color: var(--darkblue);
   color: white;
   border: 1px solid transparent;
@@ -367,7 +378,7 @@ footer {
   border-radius: 5px;
 }
 
-#register-email--specs, #classification--specs {
+.specs {
   display: block;
   font-family: "Roboto Flex", sans-serif;
   font-size: 1rem;
@@ -375,14 +386,20 @@ footer {
   padding-left: .5rem;
 }
 
-#register-button, #add-button {
+#register-button, #add-button, #edit-button, #update-button {
   justify-self: left;
 }
 
-#inv-management {
+.inv-management--title {
   padding-left: 2rem;
   font-size: 1.5rem;
   margin: 0 auto;
+}
+
+.password-update--title {
+  font-size: 1.5rem;
+  margin: 0 auto;
+  padding: 2rem 1rem 1rem 1rem;
 }
 
 #welcome-admin > h2, #welcome-client > h2 {
@@ -394,8 +411,8 @@ footer {
   display: block;
   font-family: "Aleo", serif;
   font-size: 1.5rem;
-  padding-left: 2rem;
-  margin-top: 0;
+  padding: 1.5rem 2rem;
+  margin: 0;
 }
 
 #manage-account--link, #manage-inv--link {
@@ -654,7 +671,7 @@ main {
 
 #login-form, #register-form {
   grid-area: 3 / 1 / 4 / 2;
-  width: 130%;
+  width: 66.6%;
 }
 
 #welcome-admin, #welcome-client {
