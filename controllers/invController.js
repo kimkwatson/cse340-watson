@@ -12,21 +12,16 @@ invCont.buildByClassificationId = async function (req, res, next) {
   let nav = await utilities.getNav()
   let tools = await utilities.getTools()
 
-  if (!data || data.length === 0) {
-      req.flash('notice', 'No vehicles found for that classification. Would you like to add new inventory?')
-      
-      return res.redirect('/inv/management')
-    }
-
   const grid = await utilities.buildClassificationGrid(data)
-  const className = data[0].classification_name
-  
+  const className = data?.[0]?.classification_name || "No"
+    
+        
   return res.render("inventory/classification", {
-    title: className + " vehicles",
-    tools,
-    nav,
-    grid,
-    errors: null,
+      title: className + " vehicles",
+      tools,
+      nav,
+      grid,
+      errors: null,
   })
 }
 

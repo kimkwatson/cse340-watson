@@ -285,4 +285,19 @@ async function accountUpdatePassword(req, res, next) {
   }
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildaccountManagement, buildEditAccount, accountUpdateEmail, accountUpdatePassword }
+/* ****************************************
+ *  Process logout request
+ * ************************************ */
+
+async function accountLogout(req, res) {
+  if (process.env.NODE_ENV === 'development') {
+    res.clearCookie("jwt", { httpOnly: true, })
+  } else {
+    res.clearCookie("jwt", { httpOnly: true, secure: true, })
+  }
+
+  return res.redirect("/")
+
+}
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildaccountManagement, buildEditAccount, accountUpdateEmail, accountUpdatePassword, accountLogout }

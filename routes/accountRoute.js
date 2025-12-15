@@ -60,4 +60,8 @@ router.post(
     accountController.accountUpdateEmail
 )
 
+// Process the logout attempt
+
+router.get("/logout", accountController.accountLogout)
+
 module.exports = router;
