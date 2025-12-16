@@ -144,43 +144,6 @@ Util.checkJWTToken = (req, res, next) => {
  }
 }
 
-/* **************************************
-* Build the account login view HTML - temporarily disabled
-* ************************************ 
-
-Util.buildLogin = async function() {
-  let login
-  login = '<form id="login-form" action="/account/login" method="post">'
-  + '<label id="login-email">Email:</label>' + '<input type="email" id="login-email--input" name="account_email" required placeholder="Enter your email">'
-  + '<label id="login-password">Password:</label>' + '<p id="register-email--specs">(must contain a minimum of 12 characters, a capital letter, a number, and a special character)</p>'
-  + '<input type="password" id="login-password--input" name="account_password" required placeholder="Enter your password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">'
-  + '<button id="login__eye-toggle" type="button"><img src="/images/icons/password-hide.png" alt="Show password" width="24" height="24"></button>'
-  + '<button id="login-button">Login</button>'
-  + '<p id="no-account">No account? ' + '<span id="login-registration--link"><a href="/account/register">Sign up</a></span></p>'
-  + '</form>'
-
-  return login
-}*/
-
-/* **************************************
-* Build the account registration view HTML - temporarily disabled
-* ************************************ 
-
-Util.buildRegister = async function() {
-  let register
-  register = '<form id="register-form" action="/account/register" method="post">'
-  + '<label id=register-fname>First name</label>' + '<input type="text" id="register-fname--input" name="account_firstname" required placeholder="Enter your first name" required value="locals.account_firstname">'
-  + '<label id=register-lname>Last name</label>' + '<input type="text" id="register-lname--input" name="account_lastname" required placeholder="Enter your last name" required value="<%= locals.account_lastname %>">'
-  + '<label id=register-email>Email address</label>' + '<input type="email" id="register-email--input" name="account_email" required placeholder="Enter your email address" required value="<%= locals.account_email %>">'
-  + '<label id=register-password>Password</label>' + '<p id="register-email--specs">(must contain a minimum of 12 characters, a capital letter, a number, and a special character)</p>'
-  + '<input type="password" id="register-password--input" name="account_password" required placeholder="Choose a password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"">'
-  + '<button id="register__eye-toggle" type="button"><img src="/images/icons/password-hide.png" alt="Show password" width="24" height="24"></button>'
-  + '<button id="register-button">Register</button>'
-  + '</form>'
-
-  return register
-} */
-
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
@@ -199,5 +162,39 @@ Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)
     return res.redirect("/account/login")
   }
  }
+
+ /* ****************************************
+ *  Check Admin Access
+ * ************************************ */
+Util.checkAdminAccess = async (req, res, next) => {
+  const account = res.locals.accountData
   
+  if (!account) {
+    const nav = await Util.getNav()
+    const tools = await Util.getTools()
+    req.flash("notice", "Please log in with an Employee or Admin account.")
+    return res.status(403).render("account/login", {
+      title: "Login",
+      nav,
+      tools,
+      errors: null,
+    })
+  }
+
+  const type = account.account_type
+  if (type !== "Employee" && type !== "Admin") {
+    const nav = await Util.getNav()
+    const tools = await Util.getTools()
+    req.flash("notice", "Admins and Employees only. Please log in with an authorized account.")
+    return res.status(403).render("account/login", {
+      title: "Login",
+      nav,
+      tools,
+      errors: null,
+    })
+  }
+
+  return next()
+}
+
 module.exports = Util

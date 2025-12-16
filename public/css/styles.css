@@ -255,7 +255,9 @@ footer {
 #account-messages {
   grid-area: 3 / 1 / 4 / 2;
   font-family: "Manrope", sans-serif;
-  list-style: circle inside;
+  font-size: 1.25rem;
+  list-style: disc inside;
+  margin: 0;
 }
 
 /* Vehicle Detail Styles */

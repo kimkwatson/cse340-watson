@@ -216,13 +216,14 @@ async function accountUpdateEmail(req, res) {
           res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
         }
 
-        req.flash("notice",`Thank you, ${account_firstname}. Your account has been succesfully updated.`)
+        req.flash("notice",`Thank you, ${account_firstname}. Your account has been succesfully updated:`)
         return res.status(201).render("account/management", {
           title: "Account Management",
           nav,
           tools,
           errors: null,
           showAccountInfo: true,
+          accountData: updatedAccount,
         })
       }
     else {
