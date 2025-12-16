@@ -257,28 +257,14 @@ async function accountUpdatePassword(req, res, next) {
 
     const hashedPassword = await bcrypt.hash(account_password, 10)
     const updateResult = await accountModel.updatePassword(account_id, hashedPassword)
-
+    //const accountData = await accountModel.getAccountById(account_id)
+    
     if(updateResult) {
-      const accountData = await accountModel.getAccountById(account_id)
-
       req.flash("notice", "Password updated successfully.")
-
-      return res.status(201).render("account/management", {
-        title: "Account Management",
-        nav,
-        tools,
-        errors: null,
-        accountData,
-      })
+      return res.redirect("/account/")
     } else {
       req.flash("notice", "Sorry, the password update failed. Please try again.")
-      return res.status(501).render("account/update", {
-        title: "Edit Account",
-        nav,
-        tools,
-        errors: null,
-        accountData, 
-      })
+      return res.redirect("account/update")
     }
   } catch (error) {
     next(error)

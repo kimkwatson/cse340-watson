@@ -35,7 +35,7 @@ const validate = {}
       .custom(async (account_email) => {
         const emailExists = await accountModel.checkExistingEmail(account_email)
         if (emailExists){
-          throw new Error("Email exists. Please log in or use different email")
+          throw new Error("Email exists. Please log in or use different email.")
         }
       }),
   
@@ -123,6 +123,12 @@ validate.checkLoginData = async (req, res, next) => {
   * ********************************* */
   validate.updateAccountRules = () => {
     return [
+      // hidden id is present
+      body("account_id")
+        .notEmpty()
+        .isInt()
+        .withMessage("Missing account ID."),
+      
       // firstname is required and must be string
       body("account_firstname")
         .trim()
@@ -146,8 +152,24 @@ validate.checkLoginData = async (req, res, next) => {
       .notEmpty()
       .isEmail()
       .normalizeEmail() // refer to validator.js docs
-      .withMessage("A valid email is required."),
-  
+      .withMessage("A valid email is required.")
+      .custom(async (account_email, { req }) => {
+        console.log("original email:", req.body.original_email)
+        const email = req.body.original_email
+        console.log("checking email:", email)
+        console.log("checking email:", account_email)
+
+        if (account_email === email) {
+          console.log("email unchanged → allow")
+          return true
+        }
+
+        const emailExists = await accountModel.checkExistingEmail(account_email)
+        console.log("existing account:", emailExists)
+          if (emailExists){
+            throw new Error("Email exists. Please use a different email.")
+        }
+      }),
     ]
   }
 
@@ -156,6 +178,12 @@ validate.checkLoginData = async (req, res, next) => {
   * ********************************* */
   validate.updatePasswordRules = () => {
     return [
+      // hidden id is present
+      body("account_id")
+        .notEmpty()
+        .isInt()
+        .withMessage("Missing account ID."),
+      
       // password is required and must be strong password
       body("account_password")
         .trim()

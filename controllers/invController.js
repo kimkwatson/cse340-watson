@@ -54,8 +54,14 @@ invCont.buildInvManagement = async function (req, res, next) {
   let nav = await utilities.getNav()
   let tools = await utilities.getTools()
   const classificationSelect = await utilities.buildClassificationList()
-  const type = res.locals.accountData.account_type
-  if (type === "Employee" || type === "Admin")
+  const type = res.locals.accountData?.account_type
+  
+  if (!type) {
+    req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+  
+  if (type === "Employee" || type === "Admin") {
     res.render("inventory/management", {
       title: "Inventory Management",
       tools,
@@ -63,15 +69,11 @@ invCont.buildInvManagement = async function (req, res, next) {
       classificationSelect,
       errors: null,
     })
-  else if (type === "Client")
+  } else if (type === "Client") {
     req.flash('notice', 'Admins and Employees may manage inventory. Please sign in with an authorized account.')
-    res.render("account/login", {
-    title: "Login",
-    tools,
-    nav,
-    errors: null,
-  })
-}
+    return res.redirect("account/login")
+    }
+  }
 
 /* ***************************
  *  Build add classification form view
@@ -237,11 +239,14 @@ invCont.updateInventory = async function (req, res, next) {
     classification_id,
     inv_id
   )
+  console.log("inv_id from form:", inv_id)
+
 
   if (updateResult) {
     const itemName = updateResult.inv_make + " " + updateResult.inv_model
+    
     req.flash("notice", `The ${itemName} was successfully updated.`)
-    res.redirect('/inv/management')
+    return res.redirect('/inv/management')
   } else {
     const classificationSelect = await utilities.buildClassificationList(classification_id)
     const itemName = `${inv_make} ${inv_model}`
@@ -282,11 +287,13 @@ invCont.buildErrorPage = async function (req, res, next) {
 invCont.getInventoryJSON = async (req, res, next) => {
   const classification_id = parseInt(req.params.classification_id)
   const invData = await invModel.getInventoryByClassificationId(classification_id)
-  if (invData[0].inv_id) {
+  /*if (invData[0].inv_id) {
     return res.json(invData)
   } else {
     next(new Error("No data returned"))
-  }
+  } */
+
+  return res.json(invData)
 }
 
 /* ***************************

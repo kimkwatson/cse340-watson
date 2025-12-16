@@ -57,7 +57,7 @@ router.post(
     "/update-password",
     regValidate.updatePasswordRules(),
     regValidate.checkUpdateData,
-    accountController.accountUpdateEmail
+    accountController.accountUpdatePassword
 )
 
 // Process the logout attempt

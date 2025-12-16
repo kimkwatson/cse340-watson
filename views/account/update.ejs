@@ -33,6 +33,7 @@
     <input type="text" id="register-lname--input" class="input" name="account_lastname" required value="<%= locals.account_lastname %>">
     <label>Email:</label>
     <input type="email" id="login-email--input" class="input" name="account_email" required value="<%= locals.account_email %>">
+    <input type="hidden" name="original_email" value="<%= account_email %>">
     <button id="edit-button">Update Account</button>
     <input type="hidden" name="account_id"
     <% if(locals.account_id) { %> value="<%= locals.account_id %>" <% } %>>
