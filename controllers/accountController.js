@@ -105,6 +105,7 @@ async function buildaccountManagement(req, res, next) {
     tools,
     nav,
     errors: null,
+    showAccountInfo: false,
     account_firstname,
     account_type,
   })
@@ -221,7 +222,7 @@ async function accountUpdateEmail(req, res) {
           nav,
           tools,
           errors: null,
-          accountData: updatedAccount,
+          showAccountInfo: true,
         })
       }
     else {
@@ -248,8 +249,6 @@ async function accountUpdateEmail(req, res) {
  * ************************************* */
 
 async function accountUpdatePassword(req, res, next) {
-  let nav = await utilities.getNav()
-  let tools = await utilities.getTools()
 
   const { account_id, account_password } = req.body
   
@@ -264,7 +263,7 @@ async function accountUpdatePassword(req, res, next) {
       return res.redirect("/account/")
     } else {
       req.flash("notice", "Sorry, the password update failed. Please try again.")
-      return res.redirect("account/update")
+      return res.redirect("/account/")
     }
   } catch (error) {
     next(error)

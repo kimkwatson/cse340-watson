@@ -12,11 +12,13 @@
 
 <%# Account Information %>
 
-<ul id="messages">
+<% if (showAccountInfo) { %>
+<ul id="account-messages">
   <li>First Name: <%= accountData.account_firstname %></li>
   <li>Last Name: <%= accountData.account_lastname %></li>
   <li>Email: <%= accountData.account_email %></li>
 </ul>
+<% } %>
 
 <%# Errors %>
 
@@ -29,6 +31,8 @@
 <% } %>
 
 <%# Welcome Messages %>
+
+<div id="manage-account">
 
 <% if (accountData.account_type === "Admin" || accountData.account_type === "Employee") { %>
 
@@ -54,3 +58,5 @@
   
 
 <% } %>
+
+</div>

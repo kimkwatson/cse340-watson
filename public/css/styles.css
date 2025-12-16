@@ -252,6 +252,12 @@ footer {
   padding: 0 2rem;
 }
 
+#account-messages {
+  grid-area: 3 / 1 / 4 / 2;
+  font-family: "Manrope", sans-serif;
+  list-style: circle inside;
+}
+
 /* Vehicle Detail Styles */
 
 #view-image img {
@@ -468,7 +474,7 @@ footer {
   padding: 0 2rem;
 }
 
-#manage-inv-wrapper {
+#manage-inv-wrapper, #manage-account {
   grid-area: 4 / 1 / 5 / 2;
 }
 
